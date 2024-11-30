@@ -1,0 +1,40 @@
+-- Criação do Banco de Dados
+CREATE DATABASE SistemaVendas;
+
+USE SistemaVendas;
+
+-- Tabela Clientes
+CREATE TABLE Clientes (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100),
+    Telefone VARCHAR(15),
+    Email VARCHAR(100)
+);
+
+-- Tabela Produtos
+CREATE TABLE Produtos (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100),
+    Preco DECIMAL(10, 2),
+    Estoque INT
+);
+
+-- Tabela Pedidos
+CREATE TABLE Pedidos (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Cliente_ID INT,
+    DataPedido DATE,
+    Total DECIMAL(10, 2),
+    FOREIGN KEY (Cliente_ID) REFERENCES Clientes(ID)
+);
+
+-- Tabela Itens_Pedido
+CREATE TABLE Itens_Pedido (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Pedido_ID INT,
+    Produto_ID INT,
+    Quantidade INT,
+    Subtotal DECIMAL(10, 2),
+    FOREIGN KEY (Pedido_ID) REFERENCES Pedidos(ID),
+    FOREIGN KEY (Produto_ID) REFERENCES Produtos(ID)
+);
